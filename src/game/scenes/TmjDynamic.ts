@@ -50,17 +50,11 @@ export class TmjDynamic extends Scene
             `Primary-${this.tilesheetUrl}`, // key of the tileset image
         )!
 
-        // const layer0 = this.tilemap.createLayer("Background0", tileset, 0, 0)
-        // const layer1 = this.tilemap.createLayer("Background1", tileset, 0, 0)
-        // console.log(this.tilemap, layer0, layer1)
+        const bgLayers = this.tilemap.layers.filter((layer) => layer.name.startsWith('BG_'));
+        const fgLayers = this.tilemap.layers.filter((layer) => layer.name.startsWith('FG_'));
 
-        this.tilemap.layers.filter((layer) => layer.name.startsWith('BG_')).forEach((layer) => {
-            this.tilemap.createLayer(layer.name, tileset, 0, 0)
-        })
-
-        this.tilemap.layers.filter((layer) => layer.name.startsWith('FG_')).forEach((layer) => {
-            this.tilemap.createLayer(layer.name, tileset, 0, 0)
-        })
+        bgLayers.forEach(bgLayer => this.tilemap.createLayer(bgLayer.name, tileset, 0, 0))
+        fgLayers.forEach(fgLayer => this.tilemap.createLayer(fgLayer.name, tileset, 0, 0))
 
         const cameraOffset = {
             x: this.tilemap.widthInPixels/2, 
