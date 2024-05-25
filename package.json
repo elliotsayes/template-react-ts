@@ -25,6 +25,9 @@
         "build": "vite build --config vite/config.prod.mjs"
     },
     "dependencies": {
+        "@rjsf/core": "^5.18.4",
+        "@rjsf/utils": "^5.18.4",
+        "@rjsf/validator-ajv8": "^5.18.4",
         "phaser": "^3.80.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
