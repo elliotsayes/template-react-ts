@@ -3,9 +3,6 @@ import { RJSFSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
 import { useMemo } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const log = (type: any) => console.log.bind(console, type);
-
 type MessageApi = {
   Title: string
   Description: string
@@ -89,10 +86,10 @@ export const JsonSchemaForm = ({
       <Form
         {...postProcessed}
         validator={validator}
-        onChange={log('changed')}
         onSubmit={onSubmitted}
-        onError={log('errors')}
         showErrorList={false}
+        // onChange={console.log('changed')}
+        // onError={console.log('errors')}
       />
     </div>
   );
