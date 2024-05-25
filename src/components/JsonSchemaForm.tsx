@@ -30,25 +30,15 @@ export const JsonSchemaForm = ({
     const tagProperties = tagSchema.properties as Record<string, {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const?: any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      default?: any
     }>
     const tagConstProperties = Object.keys(tagProperties)
       .filter((property) => tagProperties[property].const !== undefined)
 
-    // Created modified properties with default values addeed when const is specified
-    const tagSchemaPropertiesModified = {
-      ...tagSchema.properties,
-      ...tagConstProperties.reduce((acc, property) => ({
-        ...acc,
-        [property]: {
-          ...tagProperties[property],
-          ...(
-            tagConstProperties.includes(property) && {
-              default: tagProperties[property].const,
-            }
-          )
-        },
-      }), {}),
-    }
+    tagConstProperties.forEach((property) => {
+      tagProperties[property].default = tagProperties[property].const;
+    });
 
     // Get UI to hide const properties
     const uiSchema = tagConstProperties.reduce((acc, property) => ({
@@ -57,14 +47,9 @@ export const JsonSchemaForm = ({
         'ui:widget': 'hidden',
       },
     }), {});
-    
-    const schema = {
-      ...tagSchema,
-      properties: tagSchemaPropertiesModified,
-    }
 
     return {
-      schema,
+      schema: tagSchema,
       uiSchema,
     }
   }, [messageApi.Schema.Tags])
