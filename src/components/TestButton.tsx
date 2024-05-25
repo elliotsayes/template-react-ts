@@ -3,9 +3,11 @@ interface TestButtonProps {
 		w: number
 		h: number
 	}
+	onClickStatic: () => void
+	onClickDynamic: () => void
 }
 
-export const TestButton = ({ elementSize }: TestButtonProps) => (
+export const TestButtons = ({ elementSize, onClickStatic, onClickDynamic }: TestButtonProps) => (
 	<div style={{
 		width: `${elementSize.w}px`,
 		height: `${elementSize.h}px`,
@@ -13,11 +15,17 @@ export const TestButton = ({ elementSize }: TestButtonProps) => (
 		justifyContent: 'center',
 		alignItems: 'center',
 	}}>
-		<button className="button is-primary is-large">
+		<button className="button is-primary is-large" type="button" onClick={() => onClickStatic()}>
 			<span className="icon">
 				<i className="mdi mdi-gamepad"></i>
 			</span>
-			<span>Play</span>
+			<span>Static</span>
+		</button>
+		<button className="button is-primary is-large" type="button" onClick={() => onClickDynamic()}>
+			<span className="icon">
+				<i className="mdi mdi-gamepad"></i>
+			</span>
+			<span>Dynamic</span>
 		</button>
 	</div>
 )

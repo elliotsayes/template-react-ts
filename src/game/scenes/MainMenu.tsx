@@ -2,7 +2,7 @@ import { GameObjects, Scene } from 'phaser';
 
 import { EventBus } from '../EventBus';
 import ReactDOM from 'react-dom/client';
-import { TestButton } from '../../components/TestButton';
+import { TestButtons } from '../../components/TestButton';
 
 export class MainMenu extends Scene
 {
@@ -33,30 +33,43 @@ export class MainMenu extends Scene
             h: 80,
         }
         const memElement = document.createElement("div");
-        ReactDOM.createRoot(memElement).render(<TestButton elementSize={buttonSize} />);
+        ReactDOM.createRoot(memElement).render(
+            <TestButtons
+                elementSize={buttonSize} 
+                onClickStatic={() => this._goto('TmjStatic')}
+                onClickDynamic={() => this._goto(
+                    'TmjDynamic',
+                    {
+                        tilesheetUrl: 'assets/tileset/dynamic-123/Primary.png',
+                        tilemapUrl: 'assets/tileset/dynamic-123/Tilemap.json',
+                    },
+                )}
+            />
+        );
 
-        const button = this.add.dom(
+        this.add.dom(
             512 - buttonSize.w / 2,
             500,
             memElement,
         )
-        // button.setOrigin(0.5).setDepth(100);
-		button.addListener('click').on('click', () => {
-			this.changeScene();
-		})
 
         EventBus.emit('current-scene-ready', this);
     }
-    
-    changeScene ()
-    {
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    _goto(scene: string, params?: any) {
         if (this.logoTween)
         {
             this.logoTween.stop();
             this.logoTween = null;
         }
 
-        this.scene.start('TmjStatic');
+        this.scene.start(scene, params);
+    }
+    
+    changeScene ()
+    {
+        this._goto('TmjStatic');
     }
 
     moveLogo (vueCallback: ({ x, y }: { x: number, y: number }) => void)

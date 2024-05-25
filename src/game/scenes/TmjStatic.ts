@@ -56,12 +56,6 @@ export class TmjStatic extends Scene
 
     changeScene ()
     {
-        this.scene.start(
-            'TmjDynamic',
-            {
-                tilesheetUrl: 'assets/tileset/dynamic-123/Primary.png',
-                tilemapUrl: 'assets/tileset/dynamic-123/Tilemap.json',
-            },
-        );
+        this.scene.start("MainMenu");
     }
 } 
