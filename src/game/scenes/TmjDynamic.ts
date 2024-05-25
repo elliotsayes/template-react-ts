@@ -73,7 +73,7 @@ export class TmjDynamic extends Scene
             cameraOffset.x, cameraOffset.y - 384 + 64,
             `tilesheetUrl: ${this.tilesheetUrl}\ntilemapUrl: ${this.tilemapUrl}`, 
         {
-            fontFamily: 'Arial Black', fontSize: 24, color: '#ffffff',
+            fontFamily: 'Arial Black', fontSize: 12, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5, 0).setDepth(100);

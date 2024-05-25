@@ -40,8 +40,8 @@ export class MainMenu extends Scene
                 onClickDynamic={() => this._goto(
                     'TmjDynamic',
                     {
-                        tilesheetUrl: 'assets/tileset/dynamic-123/Primary.png',
-                        tilemapUrl: 'assets/tileset/dynamic-123/Tilemap.json',
+                        tilesheetUrl: 'https://qmjvgoukowg2tcbfbtal5veb4cuaivoypz4rropk22jibalnkzjq.arweave.net/gxNTOop1jamIJQzAvtSB4KgEVdh-eRi56taSgIFtVlM',
+                        tilemapUrl: 'https://knsoiwt37jsosdfxyhod23ogiwjngitnjmka53ltv3zpnxoouqtq.arweave.net/U2TkWnv6ZOkMt8HcPW3GRZLTIm1LFA7tc67y9t3OpCc',
                     },
                 )}
             />
