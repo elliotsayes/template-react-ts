@@ -99,15 +99,15 @@ export class TmjDynamic extends Scene
         }).setOrigin(0.5, 0).setDepth(100);
 
         const formSize = {
-            w: 200,
+            w: 700,
             h: 100,
         }
         const memElement = document.createElement("div");
         ReactDOM.createRoot(memElement).render(
             <JsonSchemaForm
                 messageApi={{
-                    Title: 'Title',
-                    Description: 'Description',
+                    Title: 'Petition the LlamaFed',
+                    Description: 'You must stake some $CRED for a chance to earn $LLAMA',
                     Schema: {
                         Tags: exampleTagSchema
                     }
