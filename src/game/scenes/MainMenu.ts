@@ -37,7 +37,7 @@ export class MainMenu extends Scene
             this.logoTween = null;
         }
 
-        this.scene.start('TmjStatic');
+        this.scene.start('TmjDynamic');
     }
 
     moveLogo (vueCallback: ({ x, y }: { x: number, y: number }) => void)
