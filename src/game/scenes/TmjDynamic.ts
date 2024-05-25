@@ -1,22 +1,38 @@
 import { EventBus } from '../EventBus';
 import { Scene } from 'phaser';
 
+type TmjDynamicConfig = {
+    tilesheetUrl: string;
+    tilemapUrl: string;
+}
+
 export class TmjDynamic extends Scene
 {
+    tilesheetUrl: string;
+    tilemapUrl: string;
+
     camera: Phaser.Cameras.Scene2D.Camera;
     background: Phaser.GameObjects.Image;
     tilemap: Phaser.Tilemaps.Tilemap;
     tmjDynamicText : Phaser.GameObjects.Text;
+    tmjDynamicAssetsText : Phaser.GameObjects.Text;
 
     constructor ()
     {
         super('TmjDynamic');
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    init(config: TmjDynamicConfig)
+    {
+        this.tilesheetUrl = config.tilesheetUrl;
+        this.tilemapUrl = config.tilemapUrl;
+    }
+
     preload ()
     {
-        this.load.image('Primary', 'assets/tileset/Primary.png');
-        this.load.tilemapTiledJSON('Tilemap', 'assets/tileset/Tilemap.json')
+        this.load.image(`Primary-${this.tilesheetUrl}`, this.tilesheetUrl);
+        this.load.tilemapTiledJSON(`Tilemap-${this.tilemapUrl}`, this.tilemapUrl)
     }
 
     create ()
@@ -26,10 +42,12 @@ export class TmjDynamic extends Scene
 
         // this.background = this.add.image(512, 384, 'Primary');
         
-        this.tilemap = this.make.tilemap({ key: 'Tilemap' })
+        this.tilemap = this.make.tilemap({
+            key: `Tilemap-${this.tilemapUrl}`,
+        })
         const tileset = this.tilemap.addTilesetImage(
             'Primary', // tileset name
-            'Primary', // key of the tileset image
+            `Primary-${this.tilesheetUrl}`, // key of the tileset image
         )!
 
         // const layer0 = this.tilemap.createLayer("Background0", tileset, 0, 0)
@@ -53,6 +71,15 @@ export class TmjDynamic extends Scene
 
         this.tmjDynamicText = this.add.text(cameraOffset.x, cameraOffset.y - 384, 'TmjDynamic', {
             fontFamily: 'Arial Black', fontSize: 64, color: '#ffffff',
+            stroke: '#000000', strokeThickness: 8,
+            align: 'center'
+        }).setOrigin(0.5, 0).setDepth(100);
+
+        this.tmjDynamicAssetsText = this.add.text(
+            cameraOffset.x, cameraOffset.y - 384 + 64,
+            `tilesheetUrl: ${this.tilesheetUrl}\ntilemapUrl: ${this.tilemapUrl}`, 
+        {
+            fontFamily: 'Arial Black', fontSize: 24, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5, 0).setDepth(100);
