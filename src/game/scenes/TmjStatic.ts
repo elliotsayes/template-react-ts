@@ -44,9 +44,14 @@ export class TmjStatic extends Scene
             this.tilemap.createLayer(layer.name, tileset, 0, 0)
         })
 
-        this.camera.centerOn(this.tilemap.widthInPixels/2, this.tilemap.heightInPixels/2)
+        const cameraOffset = {
+            x: this.tilemap.widthInPixels/2, 
+            y: this.tilemap.heightInPixels/2,
+        }
 
-        this.tmjStaticText = this.add.text(512, 0, 'TmjStatic', {
+        this.camera.centerOn(cameraOffset.x, cameraOffset.y)
+
+        this.tmjStaticText = this.add.text(cameraOffset.x, cameraOffset.y - 384, 'TmjStatic', {
             fontFamily: 'Arial Black', fontSize: 64, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
