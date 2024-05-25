@@ -15,11 +15,16 @@ type MessageApi = {
 }
 
 interface JsonSchemaFormProps {
+  elementSize: {
+    w: number
+    h: number
+  }
   messageApi: MessageApi
   onSubmitted: (data: object, event: unknown) => void
 }
 
 export const JsonSchemaForm = ({
+  elementSize,
   messageApi,
   onSubmitted,
 }: JsonSchemaFormProps) => {
@@ -68,9 +73,19 @@ export const JsonSchemaForm = ({
   }, [messageApi.Schema.Tags])
 
   return (
-    <div>
-      <h1>{messageApi.Title}</h1>
-      <h2>{messageApi.Description}</h2>
+    <div
+      style={{
+        width: `${elementSize.w}px`,
+        height: `${elementSize.h}px`,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        border: '1px solid black',
+      }}
+    >
+      <h2>{messageApi.Title}</h2>
+      <h3>{messageApi.Description}</h3>
       <Form
         {...postProcessed}
         validator={validator}

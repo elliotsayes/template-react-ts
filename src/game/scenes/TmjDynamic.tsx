@@ -99,12 +99,13 @@ export class TmjDynamic extends Scene
         }).setOrigin(0.5, 0).setDepth(100);
 
         const formSize = {
-            w: 700,
-            h: 100,
+            w: 600,
+            h: 250,
         }
         const memElement = document.createElement("div");
         ReactDOM.createRoot(memElement).render(
             <JsonSchemaForm
+                elementSize={formSize}
                 messageApi={{
                     Title: 'Petition the LlamaFed',
                     Description: 'You must stake some $CRED for a chance to earn $LLAMA',
