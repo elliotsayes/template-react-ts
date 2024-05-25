@@ -67,7 +67,7 @@ export class TmjDynamic extends Scene
     create ()
     {
         this.camera = this.cameras.main
-        this.camera.setBackgroundColor(0xff0000);
+        this.camera.setBackgroundColor(0x107ab0);
 
         // this.background = this.add.image(512, 384, 'Primary');
         
