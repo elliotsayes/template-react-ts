@@ -28,10 +28,19 @@ export class MainMenu extends Scene
             align: 'center'
         }).setOrigin(0.5).setDepth(100);
 
+        const buttonSize = {
+            w: 200,
+            h: 80,
+        }
         const memElement = document.createElement("div");
-        ReactDOM.createRoot(memElement).render(<TestButton />);
+        ReactDOM.createRoot(memElement).render(<TestButton elementSize={buttonSize} />);
 
-        const button = this.add.dom(400, 300, memElement)
+        const button = this.add.dom(
+            512 - buttonSize.w / 2,
+            500,
+            memElement,
+        )
+        // button.setOrigin(0.5).setDepth(100);
 		button.addListener('click').on('click', () => {
 			this.changeScene();
 		})
