@@ -23,7 +23,10 @@ const config: Phaser.Types.Core.GameConfig = {
         GameOver,
         TmjStatic,
         TmjDynamic,
-    ]
+    ],
+	dom: {
+		createContainer: true,
+	},
 };
 
 const StartGame = (parent: string) => {

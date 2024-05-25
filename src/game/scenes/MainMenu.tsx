@@ -1,6 +1,8 @@
 import { GameObjects, Scene } from 'phaser';
 
 import { EventBus } from '../EventBus';
+import ReactDOM from 'react-dom/client';
+import { TestButton } from '../../components/TestButton';
 
 export class MainMenu extends Scene
 {
@@ -25,6 +27,14 @@ export class MainMenu extends Scene
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5).setDepth(100);
+
+        const memElement = document.createElement("div");
+        ReactDOM.createRoot(memElement).render(<TestButton />);
+
+        const button = this.add.dom(400, 300, memElement)
+		button.addListener('click').on('click', () => {
+			this.changeScene();
+		})
 
         EventBus.emit('current-scene-ready', this);
     }
