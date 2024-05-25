@@ -1,5 +1,34 @@
 import { EventBus } from '../EventBus';
 import { Scene } from 'phaser';
+import ReactDOM from 'react-dom/client';
+import { JsonSchemaForm } from '../../components/JsonSchemaForm';
+import { RJSFSchema } from '@rjsf/utils';
+
+const exampleTagSchema: RJSFSchema = {
+  "type": "object",
+  "required": [
+    "Action",
+    "Offering",
+    "Prompt"
+  ],
+  "properties": {
+    "Action": {
+      "type": "string",
+      "const": "Petition"
+    },
+    "Offering": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "Prompt": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 100
+    }
+  }
+};
+
 
 type TmjDynamicConfig = {
     tilesheetUrl: string;
@@ -68,6 +97,30 @@ export class TmjDynamic extends Scene
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5, 0).setDepth(100);
+
+        const formSize = {
+            w: 200,
+            h: 100,
+        }
+        const memElement = document.createElement("div");
+        ReactDOM.createRoot(memElement).render(
+            <JsonSchemaForm
+                messageApi={{
+                    Title: 'Title',
+                    Description: 'Description',
+                    Schema: {
+                        Tags: exampleTagSchema
+                    }
+                }}
+                onSubmitted={() => this.changeScene()}
+            />
+        );
+
+        this.add.dom(
+            cameraOffset.x - formSize.w / 2,
+            cameraOffset.y + 100,
+            memElement,
+        )
 
         this.tmjDynamicAssetsText = this.add.text(
             cameraOffset.x, cameraOffset.y - 384 + 64,
